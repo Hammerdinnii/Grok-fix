@@ -1,0 +1,34 @@
+(() => {
+  window.__grokPortal = null;
+
+  const isPortal = (n) => {
+    if (!n || n.nodeType !== 1) return false;
+    try {
+      return n.matches?.('[role="dialog"], dialog')
+        || !!n.querySelector?.('[role="dialog"], dialog');
+    } catch {
+      return false;
+    }
+  };
+
+  const save = (el) => {
+    if (!isPortal(el)) return false;
+    window.__grokPortal = el;
+    console.log("Captured Settings portal. Paste the second script.", el);
+    return true;
+  };
+
+  const origRemove = Element.prototype.remove;
+  Element.prototype.remove = function () {
+    if (save(this)) return;
+    return origRemove.apply(this, arguments);
+  };
+
+  const origRemoveChild = Node.prototype.removeChild;
+  Node.prototype.removeChild = function (child) {
+    if (save(child)) return child;
+    return origRemoveChild.apply(this, arguments);
+  };
+
+  console.log("Hook ready. Click Settings now.");
+})();
