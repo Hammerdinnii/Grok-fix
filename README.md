@@ -15,3 +15,5 @@ This fixes the issue of not being able to go into settings/heavy mode on grok.
 > Order matters: hook → click Settings → attach script. Don’t refresh between those.
 
 Enjoy using grok. Please don't use it to make ai slop though.
+
+You can also just add a page on your bookmark bar with the script provided from https://github.com/Hammerdinnii/Grok-fix/blob/main/Bookmark%20Method
